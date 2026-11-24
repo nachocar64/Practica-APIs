@@ -1,4 +1,4 @@
-package com.example.practicaapis.model.jokes
+package com.example.practicaapis.data.remote.jokes
 
 data class JokeResponse(
     val category: String,
@@ -10,4 +10,13 @@ data class JokeResponse(
     val safe: Boolean,
     val setup: String,
     val type: String
+)
+
+data class Flags(
+    val explicit: Boolean,
+    val nsfw: Boolean,
+    val political: Boolean,
+    val racist: Boolean,
+    val religious: Boolean,
+    val sexist: Boolean
 )

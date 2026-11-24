@@ -1,4 +1,9 @@
-package com.example.practicaapis.model.mlp
+package com.example.practicaapis.data.remote.mlp
+
+data class PonyResponse(
+    val `data`: List<Data>,
+    val status: Int
+)
 
 data class Data(
     val alias: String,

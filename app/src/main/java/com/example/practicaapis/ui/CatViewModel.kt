@@ -3,7 +3,7 @@ package com.example.practicaapis.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practicaapis.data.CatRepository
-import com.example.practicaapis.model.catFacts.Data
+import com.example.practicaapis.data.remote.catFacts.Data
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

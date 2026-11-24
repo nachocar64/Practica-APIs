@@ -1,8 +1,8 @@
 package com.example.practicaapis.data
 
-import com.example.practicaapis.data.remote.CatApiService
 import com.example.practicaapis.data.remote.RetrofitClient
-import com.example.practicaapis.model.catFacts.catFacts
+import com.example.practicaapis.data.remote.catFacts.CatApiService
+import com.example.practicaapis.data.remote.catFacts.catFacts
 
 class CatRepository(
     private val apiService: CatApiService = RetrofitClient.catApiService
