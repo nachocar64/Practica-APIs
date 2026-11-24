@@ -1,6 +1,6 @@
 package com.example.practicaapis.model.jokes
 
-data class joke(
+data class JokeResponse(
     val category: String,
     val delivery: String,
     val error: Boolean,
