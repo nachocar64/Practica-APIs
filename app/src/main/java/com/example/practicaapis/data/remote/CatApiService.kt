@@ -1,4 +1,4 @@
-package com.example.practicaapis.network
+package com.example.practicaapis.data.remote
 
 import com.example.practicaapis.model.catFacts.catFacts
 import retrofit2.http.GET

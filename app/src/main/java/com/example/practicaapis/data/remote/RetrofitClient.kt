@@ -1,4 +1,4 @@
-package com.example.practicaapis.network
+package com.example.practicaapis.data.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
