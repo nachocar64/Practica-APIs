@@ -1,4 +1,9 @@
-package com.example.practicaapis.model.extinctAnimals
+package com.example.practicaapis.data.remote.extinctAnimals
+
+data class AnimalResponse(
+    val `data`: List<Data>,
+    val status: String
+)
 
 data class Data(
     val binomialName: String,

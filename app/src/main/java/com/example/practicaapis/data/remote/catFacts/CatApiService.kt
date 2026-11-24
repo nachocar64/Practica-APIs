@@ -1,6 +1,5 @@
-package com.example.practicaapis.data.remote
+package com.example.practicaapis.data.remote.catFacts
 
-import com.example.practicaapis.model.catFacts.catFacts
 import retrofit2.http.GET
 
 interface CatApiService {

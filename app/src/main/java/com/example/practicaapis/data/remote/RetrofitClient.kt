@@ -1,5 +1,6 @@
 package com.example.practicaapis.data.remote
 
+import com.example.practicaapis.data.remote.catFacts.CatApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

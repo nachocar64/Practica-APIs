@@ -1,4 +1,4 @@
-package com.example.practicaapis.model.catFacts
+package com.example.practicaapis.data.remote.catFacts
 
 data class catFacts(
     val current_page: Int,
@@ -14,4 +14,19 @@ data class catFacts(
     val prev_page_url: Any,
     val to: Int,
     val total: Int
+)
+
+data class Data(
+    val breed: String,
+    val coat: String,
+    val country: String,
+    val origin: String,
+    val pattern: String
+)
+
+data class Link(
+    val active: Boolean,
+    val label: String,
+    val page: Int,
+    val url: String
 )
