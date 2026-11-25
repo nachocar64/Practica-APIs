@@ -2,14 +2,15 @@ package com.example.practicaapis.data.remote.jokes
 
 data class JokeResponse(
     val category: String,
-    val delivery: String,
-    val error: Boolean,
+    val type: String,
+    val joke: String? = null,
+    val setup: String? = null,
+    val delivery: String? = null,
     val flags: Flags,
     val id: Int,
-    val lang: String,
     val safe: Boolean,
-    val setup: String,
-    val type: String
+    val lang: String,
+    val error: Boolean
 )
 
 data class Flags(
@@ -20,3 +21,4 @@ data class Flags(
     val religious: Boolean,
     val sexist: Boolean
 )
+
