@@ -5,7 +5,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 /** Endpoints de personajes de Pony API. Documentación: https://ponyapi.net/ */
-interface MlpService {
+interface MlpApiService {
 
     /** Lista paginada de personajes. */
     @GET("character/all")

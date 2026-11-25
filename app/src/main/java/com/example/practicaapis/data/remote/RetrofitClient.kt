@@ -1,9 +1,9 @@
 package com.example.practicaapis.data.remote
 
 import com.example.practicaapis.data.remote.catFacts.CatApiService
-import com.example.practicaapis.data.remote.extinctAnimals.ExtinctAnimalsService
-import com.example.practicaapis.data.remote.jokes.JokesService
-import com.example.practicaapis.data.remote.mlp.MlpService
+import com.example.practicaapis.data.remote.extinctAnimals.ExtinctAnimalsApiService
+import com.example.practicaapis.data.remote.jokes.JokesApiService
+import com.example.practicaapis.data.remote.mlp.MlpApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -24,16 +24,16 @@ object RetrofitClient {
         createRetrofit(BASE_URL_CAT_FACTS).create(CatApiService::class.java)
     }
 
-    val extinctAnimalsApiService: ExtinctAnimalsService by lazy {
-        createRetrofit(BASE_URL_EXTINCT_ANIMALS).create(ExtinctAnimalsService::class.java)
+    val extinctAnimalsApiService: ExtinctAnimalsApiService by lazy {
+        createRetrofit(BASE_URL_EXTINCT_ANIMALS).create(ExtinctAnimalsApiService::class.java)
     }
 
-    val jokesApiService: JokesService by lazy {
-        createRetrofit(BASE_URL_JOKES).create(JokesService::class.java)
+    val jokesApiService: JokesApiService by lazy {
+        createRetrofit(BASE_URL_JOKES).create(JokesApiService::class.java)
     }
 
-    val mlpApiService: MlpService by lazy {
-        createRetrofit(BASE_URL_MLP).create(MlpService::class.java)
+    val mlpApiService: MlpApiService by lazy {
+        createRetrofit(BASE_URL_MLP).create(MlpApiService::class.java)
     }
 
     private fun createRetrofit(baseUrl: String): Retrofit =
