@@ -13,12 +13,12 @@ import com.example.practicaapis.R
 import com.example.practicaapis.ui.CatScreen
 import com.example.practicaapis.ui.components.EmptyContent
 
-// Replace each branch with the corresponding feature Screen when it is integrated.
+// Only the integrator replaces these branches in P-05.
 @Suppress("UNUSED_PARAMETER")
 @Composable
 internal fun SectionDestination(
     route: AppRoute,
-    onBottomBarVisibilityChanged: (Boolean) -> Unit,
+    onDetailOpenChanged: (Boolean) -> Unit,
     onToggleTheme: () -> Unit,
     modifier: Modifier = Modifier
 ) {

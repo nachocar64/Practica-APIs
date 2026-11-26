@@ -20,7 +20,7 @@ import com.example.practicaapis.ui.components.CurioIcon
 import com.example.practicaapis.ui.components.CurioSymbol
 import com.example.practicaapis.ui.home.HomeScreen
 
-private const val BottomBarVisible = "curio.bottomBarVisible"
+private const val DetailOpen = "curio.detailOpen"
 
 @Composable
 fun AppNavigation(
@@ -31,8 +31,8 @@ fun AppNavigation(
     val navController = rememberNavController()
     val entry by navController.currentBackStackEntryAsState()
     val selected = AppRoute.entries.find { it.route == entry?.destination?.route } ?: AppRoute.Home
-    val barVisibility = entry?.savedStateHandle?.getStateFlow(BottomBarVisible, true)
-    val showBottomBar = barVisibility?.collectAsStateWithLifecycle()?.value ?: true
+    val detailState = entry?.savedStateHandle?.getStateFlow(DetailOpen, false)
+    val isDetailOpen = detailState?.collectAsStateWithLifecycle()?.value ?: false
     val navigate: (AppRoute) -> Unit = { destination ->
         if (entry?.destination?.route != destination.route) {
             navController.navigate(destination.route) {
@@ -45,8 +45,8 @@ fun AppNavigation(
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = { CurioTopBar(selected, darkTheme, onToggleTheme) },
-        bottomBar = { if (showBottomBar) CurioBottomBar(selected, navigate) }
+        topBar = { if (!isDetailOpen) CurioTopBar(selected, darkTheme, onToggleTheme) },
+        bottomBar = { if (!isDetailOpen) CurioBottomBar(selected, navigate) }
     ) { padding ->
         NavHost(
             navController = navController,
@@ -56,12 +56,12 @@ fun AppNavigation(
             composable(AppRoute.Home.route) { HomeScreen(navigate) }
             AppRoute.entries.filter { it != AppRoute.Home }.forEach { route ->
                 composable(route.route) { sectionEntry ->
-                    val onBottomBarVisibilityChanged: (Boolean) -> Unit = { visible ->
-                        sectionEntry.savedStateHandle[BottomBarVisible] = visible
+                    val onDetailOpenChanged: (Boolean) -> Unit = { isOpen ->
+                        sectionEntry.savedStateHandle[DetailOpen] = isOpen
                     }
                     SectionDestination(
                         route = route,
-                        onBottomBarVisibilityChanged = onBottomBarVisibilityChanged,
+                        onDetailOpenChanged = onDetailOpenChanged,
                         onToggleTheme = onToggleTheme
                     )
                 }
