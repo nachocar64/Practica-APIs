@@ -32,23 +32,8 @@ fun CatScreen(
     val facts by viewModel.catFacts.collectAsStateWithLifecycle()
     val limitInput by viewModel.limitInput.collectAsStateWithLifecycle()
     val maxLengthInput by viewModel.maxLengthInput.collectAsStateWithLifecycle()
-    val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
     val errorMessage by viewModel.errorMessage.collectAsStateWithLifecycle()
-
-    val filteredBreeds = remember(breeds, searchQuery) {
-        if (searchQuery.isBlank()) breeds
-        else breeds.filter {
-            it.breed.contains(searchQuery, ignoreCase = true) ||
-                    it.country.contains(searchQuery, ignoreCase = true) ||
-                    it.origin.contains(searchQuery, ignoreCase = true)
-        }
-    }
-
-    val filteredFacts = remember(facts, searchQuery) {
-        if (searchQuery.isBlank()) facts
-        else facts.filter { it.fact.contains(searchQuery, ignoreCase = true) }
-    }
 
     Column(
         modifier = modifier
@@ -137,24 +122,6 @@ fun CatScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Buscador de filtrado local
-        OutlinedTextField(
-            value = searchQuery,
-            onValueChange = { viewModel.updateSearchQuery(it) },
-            label = { Text("Filtrar resultados...") },
-            trailingIcon = {
-                if (searchQuery.isNotEmpty()) {
-                    IconButton(onClick = { viewModel.updateSearchQuery("") }) {
-                        Text("✕", style = MaterialTheme.typography.bodyLarge)
-                    }
-                }
-            },
-            modifier = Modifier.fillMaxWidth(),
-            singleLine = true
-        )
-
         Spacer(modifier = Modifier.height(12.dp))
 
         // Contenido de la pantalla (Carga, Error, Lista)
@@ -176,18 +143,16 @@ fun CatScreen(
                         onRetry = { viewModel.loadData() }
                     )
                 }
-                selectedTab == CatTab.BREEDS && filteredBreeds.isEmpty() -> {
+                selectedTab == CatTab.BREEDS && breeds.isEmpty() -> {
                     EmptyContent(
                         title = "No se encontraron razas",
-                        message = "Intenta cambiar el límite o borrar el filtro de búsqueda.",
-                        onAction = { viewModel.updateSearchQuery("") }
+                        message = "Intenta cambiar el parámetro de límite y volver a consultar."
                     )
                 }
-                selectedTab == CatTab.FACTS && filteredFacts.isEmpty() -> {
+                selectedTab == CatTab.FACTS && facts.isEmpty() -> {
                     EmptyContent(
                         title = "No se encontraron datos curiosos",
-                        message = "Intenta cambiar los parámetros o la búsqueda.",
-                        onAction = { viewModel.updateSearchQuery("") }
+                        message = "Intenta cambiar el límite o la longitud máxima."
                     )
                 }
                 selectedTab == CatTab.BREEDS -> {
@@ -196,7 +161,7 @@ fun CatScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         contentPadding = PaddingValues(bottom = 16.dp)
                     ) {
-                        items(filteredBreeds) { breed ->
+                        items(breeds) { breed ->
                             CatBreedCard(breed = breed)
                         }
                     }
@@ -207,7 +172,7 @@ fun CatScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         contentPadding = PaddingValues(bottom = 16.dp)
                     ) {
-                        items(filteredFacts) { fact ->
+                        items(facts) { fact ->
                             CatFactCard(fact = fact)
                         }
                     }
@@ -226,7 +191,8 @@ private fun CatBreedCard(breed: com.example.practicaapis.data.remote.catFacts.Da
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             Text(
                 text = breed.breed,
@@ -234,15 +200,36 @@ private fun CatBreedCard(breed: com.example.practicaapis.data.remote.catFacts.Da
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold
             )
-            Spacer(modifier = Modifier.height(4.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(text = "País: ${breed.country.ifBlank { "N/A" }}")
-                Text(text = "Origen: ${breed.origin.ifBlank { "N/A" }}")
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    text = "País: ${breed.country.ifBlank { "N/A" }}",
+                    modifier = Modifier.weight(1f),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = "Origen: ${breed.origin.ifBlank { "N/A" }}",
+                    modifier = Modifier.weight(1f),
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
-            Spacer(modifier = Modifier.height(2.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(text = "Pelaje: ${breed.coat.ifBlank { "N/A" }}")
-                Text(text = "Patrón: ${breed.pattern.ifBlank { "N/A" }}")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    text = "Pelaje: ${breed.coat.ifBlank { "N/A" }}",
+                    modifier = Modifier.weight(1f),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = "Patrón: ${breed.pattern.ifBlank { "N/A" }}",
+                    modifier = Modifier.weight(1f),
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
         }
     }

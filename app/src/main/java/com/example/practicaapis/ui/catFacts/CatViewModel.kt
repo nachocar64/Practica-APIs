@@ -34,9 +34,6 @@ class CatViewModel(
     private val _maxLengthInput = MutableStateFlow("")
     val maxLengthInput: StateFlow<String> = _maxLengthInput.asStateFlow()
 
-    private val _searchQuery = MutableStateFlow("")
-    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
-
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
@@ -60,10 +57,6 @@ class CatViewModel(
 
     fun updateMaxLength(maxLength: String) {
         _maxLengthInput.value = maxLength.filter { it.isDigit() }
-    }
-
-    fun updateSearchQuery(query: String) {
-        _searchQuery.value = query
     }
 
     fun loadData() {
