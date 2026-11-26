@@ -1,0 +1,30 @@
+<resources>
+    <string name="mlp_heading">The magic is\nin meeting them.</string>
+    <string name="mlp_state_heading">A world of friendship</string>
+    <string name="mlp_state_label">MY LITTLE PONY</string>
+    <string name="mlp_empty_title">No characters found.</string>
+    <string name="mlp_search">Search by name or ID</string>
+    <string name="mlp_clear">Clear</string>
+    <string name="mlp_catalog">Characters of Equestria</string>
+    <string name="mlp_search_results">Search results</string>
+    <string name="mlp_catalog_error">Couldn’t load characters. Check your connection and try again.</string>
+    <string name="mlp_no_matches">Try another name or a valid ID.</string>
+    <string name="mlp_no_characters">Pony API returned no characters.</string>
+    <string name="mlp_load_more">Load more characters</string>
+    <string name="mlp_loading_more">Loading more characters…</string>
+    <string name="mlp_page_error">Couldn’t load more characters.</string>
+    <string name="mlp_retry_page">Try loading more again</string>
+    <string name="mlp_back">Back to characters</string>
+    <string name="mlp_detail_title">Character · #%1$d</string>
+    <string name="mlp_detail_error">Couldn’t load this character. Check your connection and try again.</string>
+    <string name="mlp_detail_missing">Pony API couldn’t find this character.</string>
+    <string name="mlp_alias">ALIAS</string>
+    <string name="mlp_residence">RESIDENCE</string>
+    <string name="mlp_occupation">OCCUPATION</string>
+    <string name="mlp_gallery">Gallery</string>
+    <string name="mlp_view_image">View image %1$d</string>
+    <plurals name="mlp_images_available">
+        <item quantity="one">%d image available · My Little Pony API</item>
+        <item quantity="other">%d images available · My Little Pony API</item>
+    </plurals>
+</resources>
