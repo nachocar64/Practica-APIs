@@ -1,19 +1,18 @@
 package com.example.practicaapis.ui.navigation
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.practicaapis.R
-import com.example.practicaapis.ui.CatScreen
+import com.example.practicaapis.ui.catFacts.CatScreen
 import com.example.practicaapis.ui.components.EmptyContent
 
-// Only the integrator replaces these branches in P-05.
 @Suppress("UNUSED_PARAMETER")
 @Composable
 internal fun SectionDestination(
