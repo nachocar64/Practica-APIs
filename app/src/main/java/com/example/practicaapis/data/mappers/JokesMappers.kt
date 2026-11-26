@@ -10,8 +10,9 @@ fun JokeResponse.toDomain(): Joke {
     if (safe != true) {
         throw IllegalArgumentException("Joke fails safe-mode validation")
     }
-    val f = flags
-    if (f != null && (f.explicit || f.nsfw || f.political || f.racist || f.religious || f.sexist)) {
+    require(lang == "en") { "Joke is not in English" }
+    val f = requireNotNull(flags) { "Joke safety flags are missing" }
+    if (f.explicit || f.nsfw || f.political || f.racist || f.religious || f.sexist) {
         throw IllegalArgumentException("Joke fails blacklist flags validation")
     }
     val cat = category.orEmpty()

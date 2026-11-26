@@ -66,7 +66,7 @@ BackHandler(enabled = isDetailOpen, onBack = closeDetail)
 
 Con el detalle cerrado, Atrás sigue el historial del NavHost global. `onToggleTheme()` cambia el tema de toda la app y conserva la preferencia. El botón del shell está disponible en las vistas principales. Aplica `modifier` al contenedor raíz y agrega el padding propio del contenido.
 
-Solo el integrador modifica `SectionDestination.kt` durante P-05. En ese paso conecta cada Screen y pasa `modifier` y ambos callbacks por nombre. Mientras tanto se conserva `ui.CatScreen` y las otras rutas provisionales. Para verificar la UI, cada integrante puede usar `@Preview` con `PracticaAPIsTheme`, estados de muestra y callbacks de prueba.
+Desde P-05, `SectionDestination.kt` conecta las cuatro pantallas y pasa `modifier` y ambos callbacks por nombre. Jokes mantiene visibles las barras al mostrar el remate. Las secciones con detalle usan la cabecera local y avisan al Scaffold global. Las Previews usan `PracticaAPIsTheme`, estados de muestra y callbacks de prueba.
 
 Rutas principales de `AppRoute` en `ui.navigation` — `home`, `cats`, `extinct`, `jokes` y `ponies`. Home usa `HomeScreen(onNavigate: (AppRoute) -> Unit, modifier: Modifier = Modifier)`.
 

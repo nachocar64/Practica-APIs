@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -56,8 +57,8 @@ fun AppNavigation(
             composable(AppRoute.Home.route) { HomeScreen(navigate) }
             AppRoute.entries.filter { it != AppRoute.Home }.forEach { route ->
                 composable(route.route) { sectionEntry ->
-                    val onDetailOpenChanged: (Boolean) -> Unit = { isOpen ->
-                        sectionEntry.savedStateHandle[DetailOpen] = isOpen
+                    val onDetailOpenChanged: (Boolean) -> Unit = remember(sectionEntry) {
+                        { isOpen -> sectionEntry.savedStateHandle[DetailOpen] = isOpen }
                     }
                     SectionDestination(
                         route = route,

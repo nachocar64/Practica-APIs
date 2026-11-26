@@ -1,7 +1,8 @@
 package com.example.practicaapis.ui.jokes.components
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.practicaapis.R
@@ -28,8 +31,8 @@ fun JokeCategorySelector(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        modifier = modifier.fillMaxWidth().selectableGroup(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         JokeCategory.entries.forEach { category ->
@@ -50,12 +53,17 @@ fun JokeCategorySelector(
                 label = "CategoryContent"
             )
 
+            val weight = when (category) {
+                JokeCategory.ALL -> 88f
+                JokeCategory.GENERAL -> 104f
+                JokeCategory.PROGRAMMING -> 156f
+            }
             Surface(
                 modifier = Modifier
-                    .weight(1f)
-                    .heightIn(min = 44.dp)
+                    .weight(weight)
+                    .heightIn(min = 48.dp)
                     .clip(MaterialTheme.shapes.small)
-                    .clickable { onCategorySelected(category) },
+                    .selectable(selected = isSelected, role = Role.Tab) { onCategorySelected(category) },
                 shape = MaterialTheme.shapes.small,
                 color = containerColor,
                 contentColor = contentColor
@@ -68,6 +76,7 @@ fun JokeCategorySelector(
                     if (isSelected) {
                         Text(
                             text = "✓ ",
+                            modifier = Modifier.clearAndSetSemantics {},
                             style = MaterialTheme.typography.labelLarge,
                             fontWeight = FontWeight.Bold
                         )
