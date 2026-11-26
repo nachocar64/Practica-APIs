@@ -1,0 +1,93 @@
+package com.example.practicaapis.ui.jokes.components
+
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.example.practicaapis.R
+import com.example.practicaapis.model.JokeCategory
+
+@Composable
+fun JokeCategorySelector(
+    selectedCategory: JokeCategory,
+    onCategorySelected: (JokeCategory) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier.fillMaxWidth().selectableGroup(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        JokeCategory.entries.forEach { category ->
+            val isSelected = category == selectedCategory
+            val label = when (category) {
+                JokeCategory.ALL -> stringResource(R.string.jokes_category_all)
+                JokeCategory.GENERAL -> stringResource(R.string.jokes_category_misc)
+                JokeCategory.PROGRAMMING -> stringResource(R.string.jokes_category_programming)
+            }
+            val containerColor by animateColorAsState(
+                if (isSelected) MaterialTheme.colorScheme.primaryContainer
+                else MaterialTheme.colorScheme.surfaceVariant,
+                label = "CategoryContainer"
+            )
+            val contentColor by animateColorAsState(
+                if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer
+                else MaterialTheme.colorScheme.onSurfaceVariant,
+                label = "CategoryContent"
+            )
+
+            val weight = when (category) {
+                JokeCategory.ALL -> 88f
+                JokeCategory.GENERAL -> 104f
+                JokeCategory.PROGRAMMING -> 156f
+            }
+            Surface(
+                modifier = Modifier
+                    .weight(weight)
+                    .heightIn(min = 48.dp)
+                    .clip(MaterialTheme.shapes.small)
+                    .selectable(selected = isSelected, role = Role.Tab) { onCategorySelected(category) },
+                shape = MaterialTheme.shapes.small,
+                color = containerColor,
+                contentColor = contentColor
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    if (isSelected) {
+                        Text(
+                            text = "✓ ",
+                            modifier = Modifier.clearAndSetSemantics {},
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Text(
+                        text = label,
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Medium
+                    )
+                }
+            }
+        }
+    }
+}
