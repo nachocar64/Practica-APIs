@@ -14,6 +14,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import okhttp3.HttpUrl
+import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class JokesUnitTest {
 
@@ -132,6 +139,38 @@ class JokesUnitTest {
         val result = repository.getJoke(JokeCategory.ALL)
         assertTrue(result is Resultado.Error)
         assertEquals("Network Error", (result as Resultado.Error).mensaje)
+    }
+
+    @Test
+    fun repositorySendsSafetyOptionsAndRejectsIncompleteSafetyMetadata() = runBlocking {
+        var requested: HttpUrl? = null
+        val client = OkHttpClient.Builder().addInterceptor { chain ->
+            requested = chain.request().url
+            Response.Builder()
+                .request(chain.request())
+                .protocol(Protocol.HTTP_1_1)
+                .code(200)
+                .message("OK")
+                .body("""{"type":"single","joke":"Fixture","safe":true,"lang":"en"}""".toResponseBody())
+                .build()
+        }.build()
+        val service = Retrofit.Builder()
+            .baseUrl("https://example.test/")
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(JokesApiService::class.java)
+
+        val result = JokesRepository(service).getJoke(JokeCategory.PROGRAMMING)
+        val url = checkNotNull(requested)
+        assertEquals("/joke/Programming", url.encodedPath)
+        assertEquals("en", url.queryParameter("lang"))
+        assertEquals("true", url.queryParameter("safe-mode"))
+        assertEquals(
+            setOf("nsfw", "religious", "political", "racist", "sexist", "explicit"),
+            url.queryParameter("blacklistFlags").orEmpty().split(',').toSet()
+        )
+        assertTrue(result is Resultado.Error)
     }
 
     @Test

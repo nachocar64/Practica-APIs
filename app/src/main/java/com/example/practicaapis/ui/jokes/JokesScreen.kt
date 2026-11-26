@@ -1,5 +1,6 @@
 package com.example.practicaapis.ui.jokes
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,12 +43,12 @@ import com.example.practicaapis.ui.theme.PracticaAPIsTheme
 fun JokesScreen(
     modifier: Modifier = Modifier,
     onDetailOpenChanged: (Boolean) -> Unit = {},
-    onToggleTheme: () -> Unit = {},
-    viewModel: JokesViewModel = viewModel(),
+    @Suppress("UNUSED_PARAMETER") onToggleTheme: () -> Unit = {},
 ) {
+    val viewModel: JokesViewModel = viewModel()
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(onDetailOpenChanged) {
         onDetailOpenChanged(false)
     }
 
@@ -76,7 +77,7 @@ fun JokesContent(
     val isErrorOrEmpty = (currentJoke == null) || (state.errorMessage != null)
 
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.TopCenter
     ) {
         Column(

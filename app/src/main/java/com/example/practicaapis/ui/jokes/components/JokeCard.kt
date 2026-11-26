@@ -9,7 +9,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,6 +34,7 @@ import com.example.practicaapis.R
 import com.example.practicaapis.model.Joke
 import com.example.practicaapis.ui.components.CurioIcon
 import com.example.practicaapis.ui.components.CurioSymbol
+import com.example.practicaapis.ui.theme.DarkAccents
 import com.example.practicaapis.ui.theme.LocalCurioAccents
 
 @Composable
@@ -45,7 +45,7 @@ fun JokeCard(
     modifier: Modifier = Modifier,
 ) {
     val accents = LocalCurioAccents.current.jokes
-    val isDark = isSystemInDarkTheme()
+    val isDark = accents == DarkAccents.jokes
 
     Card(
         modifier = modifier
@@ -124,8 +124,8 @@ fun JokeCard(
                         )
                     }
                     is Joke.TwoPart -> {
-                        val pillContainerColor = if (isDark) Color(0xFF2C2735) else Color.White
-                        val punchlineContentColor = if (isDark) Color(0xFFF5EDF8) else Color(0xFF29232F)
+                        val pillContainerColor = if (isDark) MaterialTheme.colorScheme.surface else Color.White
+                        val punchlineContentColor = MaterialTheme.colorScheme.onSurface
                         val buttonTextColor = MaterialTheme.colorScheme.primary
 
                         if (!isPunchlineVisible) {
@@ -139,7 +139,7 @@ fun JokeCard(
                             ) {
                                 Row(
                                     modifier = Modifier.padding(horizontal = 20.dp, vertical = 14.dp),
-                                    horizontalArrangement = Arrangement.Center,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     CurioIcon(
@@ -148,7 +148,7 @@ fun JokeCard(
                                         tint = buttonTextColor
                                     )
                                     Text(
-                                        text = "  " + stringResource(R.string.jokes_show_punchline),
+                                        text = stringResource(R.string.jokes_show_punchline),
                                         style = MaterialTheme.typography.titleMedium,
                                         fontWeight = FontWeight.Bold,
                                         color = buttonTextColor
