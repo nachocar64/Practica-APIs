@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="extinct_museum_title">The past still\nhas stories to tell.</string>
+    <string name="extinct_museum_state_title">Stories from the past</string>
+    <string name="extinct_museum_label">EXTINCT ANIMALS</string>
+    <string name="extinct_featured">RANDOM DISCOVERY</string>
+    <string name="extinct_collection_title">Today’s collection</string>
+    <string name="extinct_collection_description">Animals discovered during this session.</string>
+    <string name="extinct_discover_another">Discover another animal</string>
+    <string name="extinct_discover_first">Discover an animal</string>
+    <string name="extinct_discovering">Discovering an animal…</string>
+    <string name="extinct_loading_title">Just a moment…</string>
+    <string name="extinct_loading_message">Gathering new curiosities for you.</string>
+    <string name="extinct_independent_loading">Each section loads its content independently.</string>
+    <string name="extinct_discovery_error">We couldn’t load an animal. Check your connection and try again.</string>
+    <string name="extinct_error_footer">The other sections are still available.</string>
+    <string name="extinct_discovery_empty_title">Your collection starts here.</string>
+    <string name="extinct_discovery_empty_message">Discover an animal to start this session.</string>
+    <string name="extinct_no_new_discovery">No animal came back this time. Try another discovery.</string>
+    <string name="extinct_retry">Try again</string>
+    <string name="extinct_retry_title">Let’s try again</string>
+    <string name="extinct_retry_message">Reconnecting to this section.</string>
+    <string name="extinct_retrying">Retrying request…</string>
+    <string name="extinct_retry_footer">Only this request is being retried.</string>
+    <string name="extinct_image_unavailable">Image unavailable</string>
+    <string name="extinct_information_available">The information is still here.</string>
+    <string name="extinct_retry_image">Retry image</string>
+    <string name="extinct_photo_description">Photo of %1$s</string>
+    <string name="extinct_photo_source">Image source: Wikimedia Commons.</string>
+    <string name="extinct_detail_title">Natural history</string>
+    <string name="extinct_species_label">EXTINCT SPECIES</string>
+    <string name="extinct_back_to_museum">Back to museum</string>
+    <string name="extinct_location">Location</string>
+    <string name="extinct_last_record">Last record</string>
+    <string name="extinct_last_record_short">Last record: %1$s</string>
+    <string name="extinct_description">A story to remember</string>
+    <string name="extinct_unknown">Unknown</string>
+    <string name="extinct_no_description">No description available.</string>
+    <string name="extinct_read_on_wikipedia">Read on Wikipedia</string>
+    <string name="extinct_link_error">Couldn’t open Wikipedia.</string>
+</resources>
