@@ -11,7 +11,8 @@ interface JokesApiService {
     @GET("joke/{categoria}")
     suspend fun obtenerChiste(
         @Path("categoria") categoria: String = "Any",
-        @Query("blacklistFlags") blacklistFlags: String? = null
+        @Query("blacklistFlags") blacklistFlags: String? = "nsfw,religious,political,racist,sexist,explicit",
+        @Query("lang") lang: String = "en",
+        @Query("safe-mode") safeMode: Boolean? = true
     ): JokeResponse
 }
-

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="jokes_headline">A little break.\nA lot of smiles.</string>
+    <string name="jokes_family_friendly">Always family-friendly</string>
+    <string name="jokes_category_all">All</string>
+    <string name="jokes_category_misc">Misc</string>
+    <string name="jokes_category_programming">Programming</string>
+    <string name="jokes_show_punchline">Show punchline</string>
+    <string name="jokes_single_explanation">The best breaks need no explanation.</string>
+    <string name="jokes_another_joke">Another joke</string>
+    <string name="jokes_footer_another">A new joke, in the same category.</string>
+
+    <string name="jokes_header_alt">Time for a laugh</string>
+    <string name="jokes_subtitle_alt">JOKEAPI · SAFE MODE</string>
+
+    <string name="jokes_offline_title">You’re offline</string>
+    <string name="jokes_offline_message">We couldn’t connect. Check your connection and try again.</string>
+    <string name="jokes_try_again">Try again</string>
+    <string name="jokes_offline_footer">The other sections are still available.</string>
+
+    <string name="jokes_empty_title">No jokes right now.</string>
+    <string name="jokes_empty_message">No jokes are available for this selection.</string>
+    <string name="jokes_reset_categories">Reset categories</string>
+    <string name="jokes_empty_footer">Each section loads its content independently.</string>
+
+    <string name="jokes_loading_title">Let’s try again</string>
+    <string name="jokes_loading_message">Reconnecting to this section.</string>
+    <string name="jokes_loading_status">Retrying request…</string>
+    <string name="jokes_loading_footer">Only this request is being retried.</string>
+</resources>
