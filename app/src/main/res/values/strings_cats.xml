@@ -1,0 +1,26 @@
+<resources>
+    <string name="cats_heading">Little cats,\nbig stories.</string>
+    <string name="cats_state_heading">Explore the breeds</string>
+    <string name="cats_source">CAT FACTS</string>
+    <string name="cats_search">Search breeds by name</string>
+    <string name="cats_clear">Clear</string>
+    <string name="cats_filter_all">All</string>
+    <string name="cats_filter_short">Short</string>
+    <string name="cats_filter_semi_long">Semi-long</string>
+    <string name="cats_filter_curly">Curly</string>
+    <string name="cats_results">Breeds to discover</string>
+    <string name="cats_load_error">Couldn’t load the breeds. Check your connection and try again.</string>
+    <string name="cats_empty_title">No breeds found.</string>
+    <string name="cats_empty_message">Try another name or clear the filters.</string>
+    <string name="cats_catalog_artwork">Local artwork · Cat Facts has no photos.</string>
+    <string name="cats_detail_title">Cat breed</string>
+    <string name="cats_local_artwork">LOCAL ARTWORK</string>
+    <string name="cats_detail_intro">One breed. Five ways to get to know it.</string>
+    <string name="cats_country">Country</string>
+    <string name="cats_origin">Origin</string>
+    <string name="cats_coat">Coat type</string>
+    <string name="cats_pattern">Coat pattern</string>
+    <string name="cats_unknown">Not available</string>
+    <string name="cats_artwork_note">Decorative artwork, not a photo of this breed.</string>
+    <string name="cats_back">Back to breeds</string>
+</resources>

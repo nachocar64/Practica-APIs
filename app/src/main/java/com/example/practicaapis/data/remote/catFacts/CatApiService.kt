@@ -8,7 +8,8 @@ interface CatApiService {
     /** Obtiene razas de gatos con parámetro de límite opcional. */
     @GET("breeds")
     suspend fun getCatBreeds(
-        @Query("limit") limit: Int? = null
+        @Query("limit") limit: Int? = null,
+        @Query("page") page: Int? = null
     ): catFacts
 
     /** Obtiene un dato curioso aleatorio de gatos, opcionalmente limitando su longitud. */
