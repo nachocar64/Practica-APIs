@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">PracticaAPIs</string>
+    <string name="app_name">Curio</string>
+    <string name="brand_name">curio</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_cats">Cats</string>
+    <string name="nav_extinct">Extinct</string>
+    <string name="nav_jokes">Jokes</string>
+    <string name="nav_ponies">Ponies</string>
+    <string name="enable_dark_theme">Switch to dark theme</string>
+    <string name="enable_light_theme">Switch to light theme</string>
+    <string name="home_title">The world is full\nof curiosity</string>
+    <string name="home_subtitle">Follow a clue. Discover something new.</string>
+    <string name="home_cats">Breeds with character</string>
+    <string name="home_extinct">Stories from the past</string>
+    <string name="home_jokes">Take a laugh break</string>
+    <string name="home_ponies">A world of friendship</string>
+    <string name="home_footer">Four worlds. One curious mind.</string>
+    <string name="loading_title">Just a moment…</string>
+    <string name="loading_message">Gathering new curiosities for you.</string>
+    <string name="loading_status">Loading content…</string>
+    <string name="error_title">Couldn’t load content</string>
+    <string name="try_again">Try again</string>
+    <string name="empty_title">No results</string>
+    <string name="empty_message">Try another name or clear the filters.</string>
+    <string name="clear_search">Clear search</string>
+    <string name="section_pending">This section is coming soon.</string>
+    <string name="cats_title">Cat Breeds (CatFacts API)</string>
 </resources>
