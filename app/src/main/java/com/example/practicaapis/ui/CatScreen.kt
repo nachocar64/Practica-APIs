@@ -5,31 +5,28 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.practicaapis.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CatScreen(viewModel: CatViewModel = CatViewModel()) {
-    val breeds by viewModel.catBreeds.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
-    val errorMessage by viewModel.errorMessage.collectAsState()
+fun CatScreen(viewModel: CatViewModel = viewModel(), modifier: Modifier = Modifier) {
+    val breeds by viewModel.catBreeds.collectAsStateWithLifecycle()
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
+    val errorMessage by viewModel.errorMessage.collectAsStateWithLifecycle()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Cat Breeds (CatFacts API)") }
-            )
-        }
-    ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
+    Column(modifier.fillMaxSize()) {
+        Text(
+            stringResource(R.string.cats_title),
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            style = MaterialTheme.typography.titleMedium
+        )
+        Box(Modifier.fillMaxWidth().weight(1f)) {
             when {
                 isLoading -> {
                     CircularProgressIndicator(
