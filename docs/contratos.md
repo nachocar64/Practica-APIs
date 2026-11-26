@@ -14,30 +14,74 @@ Todos los paquetes se encuentran bajo `com.example.practicaapis`.
 
 ## Pantallas y navegación
 
-Las firmas de estas cuatro pantallas se reservan para los integrantes. Cada función recibe los mismos argumentos.
+Las cuatro pantallas se implementan en sus paquetes de sección durante el trabajo individual.
 
 ```kotlin
+// ui.catFacts
 @Composable
 fun CatScreen(
     modifier: Modifier = Modifier,
-    onBottomBarVisibilityChanged: (Boolean) -> Unit = {},
+    onDetailOpenChanged: (Boolean) -> Unit = {},
+    onToggleTheme: () -> Unit = {}
+)
+
+// ui.extinctAnimals
+@Composable
+fun ExtinctAnimalsScreen(
+    modifier: Modifier = Modifier,
+    onDetailOpenChanged: (Boolean) -> Unit = {},
+    onToggleTheme: () -> Unit = {}
+)
+
+// ui.jokes
+@Composable
+fun JokesScreen(
+    modifier: Modifier = Modifier,
+    onDetailOpenChanged: (Boolean) -> Unit = {},
+    onToggleTheme: () -> Unit = {}
+)
+
+// ui.mlp
+@Composable
+fun MlpScreen(
+    modifier: Modifier = Modifier,
+    onDetailOpenChanged: (Boolean) -> Unit = {},
     onToggleTheme: () -> Unit = {}
 )
 ```
 
-Aplica esa firma a `CatScreen` en `ui.catFacts`, `ExtinctAnimalsScreen` en `ui.extinctAnimals`, `JokesScreen` en `ui.jokes` y `MlpScreen` en `ui.mlp`.
+El Scaffold muestra las dos barras globales en Home y en la vista principal de cada sección. Cuando una sección abre un detalle, llama a `onDetailOpenChanged(true)` para ocultar las dos barras. Al cerrar el detalle, comunica `false` para restaurarlas. El estado de las barras pertenece a la entrada de navegación de cada sección. El Scaffold sigue aplicando los insets del sistema durante el detalle.
 
-`SectionDestination.kt` es el punto de integración. Sustituye la rama correspondiente y pasa `modifier` y ambos callbacks por nombre. Gatos usa temporalmente `ui.CatScreen` con su ViewModel existente. Cada destino posee su propio estado de visibilidad. En una sección con detalle guarda la selección con `rememberSaveable` o `SavedStateHandle` y sincroniza la barra al cambiar de vista.
+La sección administra su detalle y su cabecera local. Si el detalle se representa como estado local, guarda la selección con `rememberSaveable` o `SavedStateHandle`, y usa la misma acción para la flecha local y el botón Atrás de Android:
 
 ```kotlin
-LaunchedEffect(isDetailOpen) {
-    onBottomBarVisibilityChanged(!isDetailOpen)
+val closeDetail = { selectedId = null }
+val isDetailOpen = selectedId != null
+
+LaunchedEffect(isDetailOpen, onDetailOpenChanged) {
+    onDetailOpenChanged(isDetailOpen)
 }
+BackHandler(enabled = isDetailOpen, onBack = closeDetail)
 ```
 
-Al volver del detalle, actualiza `isDetailOpen` para mostrar la barra de nuevo. Usa `BackHandler(enabled = isDetailOpen)` si gestionas el detalle como estado local. `onToggleTheme()` cambia el tema de toda la app. El botón del shell ya lo ofrece. El Scaffold global resuelve las barras e insets y entrega el área disponible. Aplica `modifier` al contenedor raíz y agrega solo el padding propio del contenido.
+Con el detalle cerrado, Atrás sigue el historial del NavHost global. `onToggleTheme()` cambia el tema de toda la app y conserva la preferencia. El botón del shell está disponible en las vistas principales. Aplica `modifier` al contenedor raíz y agrega el padding propio del contenido.
 
-Rutas principales de `AppRoute` en `ui.navigation`: `home`, `cats`, `extinct`, `jokes` y `ponies`. Home usa `HomeScreen(onNavigate: (AppRoute) -> Unit, modifier: Modifier = Modifier)`.
+Solo el integrador modifica `SectionDestination.kt` durante P-05. En ese paso conecta cada Screen y pasa `modifier` y ambos callbacks por nombre. Mientras tanto se conserva `ui.CatScreen` y las otras rutas provisionales. Para verificar la UI, cada integrante puede usar `@Preview` con `PracticaAPIsTheme`, estados de muestra y callbacks de prueba.
+
+Rutas principales de `AppRoute` en `ui.navigation` — `home`, `cats`, `extinct`, `jokes` y `ponies`. Home usa `HomeScreen(onNavigate: (AppRoute) -> Unit, modifier: Modifier = Modifier)`.
+
+## Recursos de texto
+
+Cada integrante coloca sus textos en inglés en su archivo bajo `app/src/main/res/values/`. Usa el prefijo indicado para evitar colisiones en `R.string`.
+
+| Sección | Archivo | Prefijo |
+| --- | --- | --- |
+| `CatScreen` | `strings_cats.xml` | `cats_` |
+| `ExtinctAnimalsScreen` | `strings_extinct.xml` | `extinct_` |
+| `JokesScreen` | `strings_jokes.xml` | `jokes_` |
+| `MlpScreen` | `strings_mlp.xml` | `mlp_` |
+
+Los textos globales se mantienen en `strings.xml`.
 
 ## Componentes compartidos
 
